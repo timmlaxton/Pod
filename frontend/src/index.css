@@ -1,3 +1,18 @@
 main {
   min-height: 80vh ;
 }
+
+.title {
+  text-align: center;
+}
+
+.card {
+  min-height: 200px;
+  border: none;
+}
+
+
+.card-title {
+color: black;
+
+}
