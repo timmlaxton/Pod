@@ -1,11 +1,20 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
+import axios from 'axios'
 import {Link} from 'react-router-dom'
-import {Row, Col, Image, ListGroup, Card, Button} from 'react-bootstrap'
-import podcasts from '../podcasts'
+import {Row, Col, Image, ListGroup} from 'react-bootstrap'
 
 const EpisodeScreen = ({match}) => {
-    const podcast = podcasts.find((p) => p._id === match.params.id)
+const [podcast, setPodcast] = useState({})
 
+useEffect(() => {
+  const fetchPodcast = async () => {
+    const {data} = await axios.get(`/api/podcasts/${match.params.id}`)
+
+    setPodcast(data)
+  }
+
+  fetchPodcast()
+}, [])
 
   return (
     <>
