@@ -15,10 +15,6 @@ const podcastSchema = mongoose.Schema(
     type: String,
     required: true,
   },
-  password: {
-    type: String,
-    required: true
-  },
   description: {
     type: String,
     required: true,

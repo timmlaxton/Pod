@@ -18,21 +18,22 @@ const podcasts = [
     name: 'David Bishop',
     image: '/images/2000.jpg',
     time: '',
-    description: '',
+    description: 'Nicola is an anthropologist-turned-illustrator and comics scholar. She is the author of Billy, Me & You (Myriad, 2011), an acclaimed graphic memoir about her bereavement following the death of her two-year old son. It was initially serialised in Liquorice Magazine, a comic Nicola produced with her daughter, and it received Highly Commended in the Popular Medicine category of the 2012 British Medical Association Medical Book Awards. Nicola is also co-editor with Cath Tate of The Inking Woman, published by Myriad in March 2018.',
   },
   {
     
     name: 'Jim Alexander',
     image: '/images/jimbot.jpg',
     time: '',
-    description: '',
+    description: 'Nicola is an anthropologist-turned-illustrator and comics scholar. She is the author of Billy, Me & You (Myriad, 2011), an acclaimed graphic memoir about her bereavement following the death of her two-year old son. It was initially serialised in Liquorice Magazine, a comic Nicola produced with her daughter, and it received Highly Commended in the Popular Medicine category of the 2012 British Medical Association Medical Book Awards. Nicola is also co-editor with Cath Tate of The Inking Woman, published by Myriad in March 2018.',
   },
   {
     
     name: 'Leah Moore',
     image: '/images/ravens.jpg',
     time: '',
-    description: '',
+    description: 'Nicola is an anthropologist-turned-illustrator and comics scholar. She is the author of Billy, Me & You (Myriad, 2011), an acclaimed graphic memoir about her bereavement following the death of her two-year old son. It was initially serialised in Liquorice Magazine, a comic Nicola produced with her daughter, and it received Highly Commended in the Popular Medicine category of the 2012 British Medical Association Medical Book Awards. Nicola is also co-editor with Cath Tate of The Inking Woman, published by Myriad in March 2018.',
+
   },
 ]
 
