@@ -36,4 +36,4 @@ const podcasts = [
   },
 ]
 
-module.exports =  podcasts
+export default podcasts
