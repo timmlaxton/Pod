@@ -14,7 +14,7 @@ useEffect(() => {
   }
 
   fetchPodcast()
-}, [])
+}, [match])
 
   return (
     <>
