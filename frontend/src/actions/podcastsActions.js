@@ -1,4 +1,5 @@
-import { PODCAST_LIST_REQUEST, PODCAST_LIST_SUCCESS, PRODUCT_LIST_FAIL } from '../constants/podcastsConstants';
+import axios from 'axios';
+import { PODCAST_LIST_REQUEST, PODCAST_LIST_SUCCESS, PODCAST_LIST_FAIL } from '../constants/podcastsConstants';
 
 export const listPodcasts = () => async (dispatch) => {
 	try {

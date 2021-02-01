@@ -1,32 +1,39 @@
-import React, {useState, useEffect} from 'react'
-import axios from 'axios'
-import {Row, Col} from 'react-bootstrap'
-import Podcast from '../components/Podcast' 
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Row, Col } from 'react-bootstrap';
+import Podcast from '../components/Podcast';
+import Message from '../components/Message';
+import Loader from '../components/Loader';
+import { listPodcasts } from '../actions/podcastsActions';
+
 const PodcastScreen = () => {
-  const [podcasts, setPodcasts] = useState([])
+	const dispatch = useDispatch();
 
-  useEffect(() => {
-    const fetchPodcasts = async () => {
-      const {data} = await axios.get('/api/podcasts')
+	const podcastList = useSelector((state) => state.podcastList);
+	const { loading, error, podcasts } = podcastList;
 
-      setPodcasts(data)
-    }
+	useEffect(() => {
+		dispatch(listPodcasts());
+	}, [dispatch]);
 
-    fetchPodcasts()
-  }, [])
+	return (
+		<>
+			<h1 className="title">Episodes</h1>
+			{loading ? (
+				<Loader />
+			) : error ? (
+				<Message variant="danger">{error}</Message>
+			) : (
+				<Row>
+					{podcasts.map((podcast) => (
+						<Col sm={12} md={6} lg={4} xl={3}>
+							<Podcast podcast={podcast} />
+						</Col>
+					))}
+				</Row>
+			)}
+		</>
+	);
+};
 
-  return (
-    <>
-      <h1 className='title'>Episodes</h1>
-      <Row>
-       {podcasts.map(podcast => (
-         <Col sm={12} md={6} lg={4} xl={3}>
-         <Podcast podcast={podcast} />
-         </Col>
-       ))}
-      </Row>
-    </>
-  )
-}
-
-export default PodcastScreen
+export default PodcastScreen;
