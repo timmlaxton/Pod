@@ -1,18 +1,23 @@
 main {
-  min-height: 80vh ;
+	min-height: 80vh;
 }
 
 .title {
-  text-align: center;
+	text-align: center;
 }
 
 .card {
-  min-height: 200px;
-  border: none;
+	min-height: 200px;
+	border: none;
 }
 
-
 .card-title {
-color: black;
+	color: black;
+}
 
+.button {
+	text-align: center;
+	margin: auto;
+	position: fixed;
+	display: flex;
 }
