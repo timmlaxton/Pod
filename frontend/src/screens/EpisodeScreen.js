@@ -1,42 +1,48 @@
-import React, {useState, useEffect} from 'react'
-import axios from 'axios'
-import {Link} from 'react-router-dom'
-import {Row, Col, Image, ListGroup} from 'react-bootstrap'
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { Row, Col, Image, ListGroup } from 'react-bootstrap';
+import Message from '../components/Message';
+import Loader from '../components/Loader';
+import { listPodcastDetails } from '../actions/podcastsActions';
 
-const EpisodeScreen = ({match}) => {
-const [podcast, setPodcast] = useState({})
+const EpisodeScreen = ({ match }) => {
+	const dispatch = useDispatch();
 
-useEffect(() => {
-  const fetchPodcast = async () => {
-    const {data} = await axios.get(`/api/podcasts/${match.params.id}`)
+	const podcastDetails = useSelector((state) => state.podcastDetails);
+	const { loading, error, podcast } = podcastDetails;
 
-    setPodcast(data)
-  }
+	useEffect(() => {
+		dispatch(listPodcastDetails(match.params.id));
+	}, [dispatch, match]);
 
-  fetchPodcast()
-}, [match])
+	return (
+		<>
+			<Link className="btn btn-light my-3" to="/podcasts">
+				Go Back
+			</Link>
+			{loading ? (
+				<Loader />
+			) : error ? (
+				<Message variant="danger">{error}</Message>
+			) : (
+				<Row>
+					<Col md={3}>
+						<br />
+						<Image src={podcast.image} alt={podcast.name} fluid />
+					</Col>
+					<Col md={5}>
+						<ListGroup variant="flush">
+							<ListGroup.Item>
+								<h3>{podcast.name}</h3>
+							</ListGroup.Item>
+							<ListGroup.Item>{podcast.description}</ListGroup.Item>
+						</ListGroup>
+					</Col>
+				</Row>
+			)}
+		</>
+	);
+};
 
-  return (
-    <>
-    <Link className='btn btn-light my-3' to='/podcast'>Go Back</Link>
-    <Row>
-      <Col md={3}>
-        <br/>
-      <Image src={podcast.image} alt={podcast.name} fluid />
-      </Col>
-      <Col md={5}>
-        <ListGroup variant='flush'>
-          <ListGroup.Item>
-            <h3>{podcast.name}</h3>
-          </ListGroup.Item>
-          <ListGroup.Item>
-            {podcast.description}
-          </ListGroup.Item>
-        </ListGroup>
-      </Col>
-    </Row>
-    </>
-  )
-}
-
-export default EpisodeScreen
+export default EpisodeScreen;
