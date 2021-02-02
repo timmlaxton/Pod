@@ -41,4 +41,44 @@ const deletePodcast = asyncHandler(async (req, res) => {
 	}
 });
 
-export { getPodcasts, getPodcastById, deletePodcast };
+// Create Podcast
+// CREATE /api/podcasts
+// Admin
+
+const createPodcast = asyncHandler(async (req, res) => {
+	const { name, image, description } = req.body;
+	const podcast = new Podcast({
+		name,
+		image,
+		description
+	});
+
+	const createdPodcast = await podcast.save();
+	res.status(201).json(createdPodcast);
+});
+
+// Update Podcast
+// PUT /api/podcasts/:id
+// Admin
+
+const updatePodcast = asyncHandler(async (req, res) => {
+	const { name, image, description } = req.body;
+
+	const podcast = await Podcast.findById(req.params.id);
+
+	if (podcast) {
+		podcast.name = name;
+		podcast.escription = description;
+		if (image) {
+			podcast.image = image;
+		}
+
+		const updatedPodcast = await podcast.save();
+		res.json(updatedPodcast);
+	} else {
+		res.status(404);
+		throw new error('Podcast Not Found');
+	}
+});
+
+export { getPodcasts, getPodcastById, deletePodcast, createPodcast, updatePodcast };

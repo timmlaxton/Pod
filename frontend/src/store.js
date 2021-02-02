@@ -1,12 +1,19 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { podcastListReducer, podcastDetailsReducer } from './reducers/podcastReducers';
+import {
+	podcastListReducer,
+	podcastDetailsReducer,
+	podcastDeleteReducer,
+	podcastCreateReducer
+} from './reducers/podcastReducers';
 import { userLoginReducer } from './reducers/userReducers';
 
 const reducer = combineReducers({
 	podcastList: podcastListReducer,
 	podcastDetails: podcastDetailsReducer,
+	podcastDelete: podcastDeleteReducer,
+	podcastCreate: podcastCreateReducer,
 	userLogin: userLoginReducer
 });
 

@@ -4,9 +4,10 @@ import { Table, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
-import { listPodcasts } from '../actions/podcastsActions';
+import { listPodcasts, deletePodcast } from '../actions/podcastsActions';
+import { PODCAST_CREATE_RESET } from '../constants/podcastsConstants';
 
-const PodcastListScreen = ({ history, match }) => {
+const PodcastListScreen = ({ history }) => {
 	const dispatch = useDispatch();
 
 	const podcastList = useSelector((state) => state.podcastList);
@@ -15,22 +16,33 @@ const PodcastListScreen = ({ history, match }) => {
 	const userLogin = useSelector((state) => state.userLogin);
 	const { userInfo } = userLogin;
 
+	const podcastDelete = useSelector((state) => state.podcastDelete);
+	const { loading: loadingDelete, error: errorDelete, success: successDelete } = podcastDelete;
+
+	const podcastCreate = useSelector((state) => state.podcastCreate);
+	const { loading: loadingCreate, error: errorCreate, success: successCreate, podcast: createdPodcast } = podcastCreate;
+
 	useEffect(() => {
-		if (userInfo && userInfo.isAdmin) {
-			dispatch(listPodcasts());
-		} else {
+		dispatch({ type: PODCAST_CREATE_RESET });
+
+		if (!userInfo && userInfo.isAdmin) {
 			history.push('/login');
 		}
-	}, [dispatch, history, userInfo]);
+		if (successCreate) {
+			history.push(`/admin/podcast/${createdPodcast._id}/edit`);
+		} else {
+			dispatch(listPodcasts());
+		}
+	}, [dispatch, history, userInfo, successDelete, successCreate, createdPodcast]);
 
 	const deleteHandler = (id) => {
 		if (window.confirm('Are you sure')) {
+			dispatch(deletePodcast(id));
 		}
 	};
 
 	const createPodcastHandler = () => {
-		// dispatch(createProduct())
-		//history.push(`/admin/product/create`)
+		history.push(`/admin/product/create`);
 	};
 
 	return (
@@ -45,6 +57,10 @@ const PodcastListScreen = ({ history, match }) => {
 					</Button>
 				</Col>
 			</Row>
+			{/* {loadingDelete && <Loader />} */}
+			{errorDelete && <Message variant="danger">{errorDelete}</Message>}
+			{loadingCreate && <Loader />}
+			{errorCreate && <Message variant="danger">{errorCreate}</Message>}
 			{loading ? (
 				<Loader />
 			) : error ? (
