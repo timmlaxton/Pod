@@ -25,4 +25,20 @@ const getPodcastById = asyncHandler(async (req, res) => {
 	}
 });
 
-export { getPodcasts, getPodcastById };
+// Delete a podcast
+// DELETE /api/podcast/:id
+// Admin
+
+const deletePodcast = asyncHandler(async (req, res) => {
+	const podcast = await Podcast.findById(req.params.id);
+
+	if (podcast) {
+		await podcast.remove();
+		res.json({ message: 'Podcast has been deleted' });
+	} else {
+		res.status(404);
+		throw new Error('Product not found');
+	}
+});
+
+export { getPodcasts, getPodcastById, deletePodcast };
