@@ -4,7 +4,7 @@ import { Table, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
-import { listPodcasts, deletePodcast } from '../actions/podcastsActions';
+import { listPodcasts, deletePodcast, podcastCreate } from '../actions/podcastsActions';
 import { PODCAST_CREATE_RESET } from '../constants/podcastsConstants';
 
 const PodcastListScreen = ({ history }) => {
@@ -42,7 +42,7 @@ const PodcastListScreen = ({ history }) => {
 	};
 
 	const createPodcastHandler = () => {
-		history.push(`/admin/product/create`);
+		history.push(`/admin/podcast/create`);
 	};
 
 	return (

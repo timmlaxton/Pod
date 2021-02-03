@@ -5,7 +5,8 @@ import {
 	podcastListReducer,
 	podcastDetailsReducer,
 	podcastDeleteReducer,
-	podcastCreateReducer
+	podcastCreateReducer,
+	podcastUpdateReducer
 } from './reducers/podcastReducers';
 import { userLoginReducer } from './reducers/userReducers';
 
@@ -14,6 +15,7 @@ const reducer = combineReducers({
 	podcastDetails: podcastDetailsReducer,
 	podcastDelete: podcastDeleteReducer,
 	podcastCreate: podcastCreateReducer,
+	podcastUpdate: podcastUpdateReducer,
 	userLogin: userLoginReducer
 });
 

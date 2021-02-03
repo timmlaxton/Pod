@@ -21,3 +21,52 @@ main {
 	position: fixed;
 	display: flex;
 }
+
+.title {
+	position: left;
+}
+
+.paragraph {
+	margin-left: auto;
+	margin-right: auto;
+	width: 50em;
+	margin-top: 30px;
+}
+
+.jumbotron {
+	width: 100%;
+	height: 0%;
+	background: none;
+
+	margin-left: 5%;
+	margin-right: -10%;
+	width: 50%;
+}
+
+.image {
+	width: 200%;
+}
+
+.card {
+	min-height: 10px;
+	border: none;
+	flex: row;
+}
+
+.card-body {
+	width: 500%;
+}
+
+.card-title {
+	margin-right: 85%;
+	font-size: small;
+}
+
+.podcasts {
+	margin-right: -10%;
+	margin-left: 5%;
+}
+
+.episode-title {
+	margin-top: 60px;
+}

@@ -21,7 +21,7 @@ const getPodcastById = asyncHandler(async (req, res) => {
 		res.json(podcast);
 	} else {
 		res.status(404);
-		throw new Error('Product not found');
+		throw new Error('Podcast not found');
 	}
 });
 
@@ -37,7 +37,7 @@ const deletePodcast = asyncHandler(async (req, res) => {
 		res.json({ message: 'Podcast has been deleted' });
 	} else {
 		res.status(404);
-		throw new Error('Product not found');
+		throw new Error('Podcast not found');
 	}
 });
 

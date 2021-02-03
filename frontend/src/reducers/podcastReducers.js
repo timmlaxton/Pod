@@ -1,6 +1,7 @@
 import {
 	PODCAST_CREATE_FAIL,
 	PODCAST_CREATE_REQUEST,
+	PODCAST_CREATE_RESET,
 	PODCAST_CREATE_SUCCESS,
 	PODCAST_DELETE_FAIL,
 	PODCAST_DELETE_REQUEST,
@@ -10,7 +11,11 @@ import {
 	PODCAST_DETAILS_SUCCESS,
 	PODCAST_LIST_FAIL,
 	PODCAST_LIST_REQUEST,
-	PODCAST_LIST_SUCCESS
+	PODCAST_LIST_SUCCESS,
+	PODCAST_UPDATE_FAIL,
+	PODCAST_UPDATE_REQUEST,
+	PODCAST_UPDATE_RESET,
+	PODCAST_UPDATE_SUCCESS
 } from '../constants/podcastsConstants';
 
 export const podcastListReducer = (state = { podcasts: [] }, action) => {
@@ -60,6 +65,23 @@ export const podcastCreateReducer = (state = {}, action) => {
 			return { loading: false, success: true, podcast: action.payload };
 		case PODCAST_CREATE_FAIL:
 			return { loading: false, error: action.payload };
+		case PODCAST_CREATE_RESET:
+			return {};
+		default:
+			return state;
+	}
+};
+
+export const podcastUpdateReducer = (state = { podcast: {} }, action) => {
+	switch (action.type) {
+		case PODCAST_UPDATE_REQUEST:
+			return { loading: true };
+		case PODCAST_UPDATE_SUCCESS:
+			return { loading: false, success: true, podcast: action.payload };
+		case PODCAST_UPDATE_FAIL:
+			return { loading: false, error: action.payload };
+		case PODCAST_UPDATE_RESET:
+			return { podcast: {} };
 		default:
 			return state;
 	}

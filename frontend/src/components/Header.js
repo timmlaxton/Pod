@@ -16,14 +16,18 @@ const Header = () => {
 
 	return (
 		<header>
-			<Navbar bg="light" expand="lg" collapseOnSelect>
+			<Navbar className="navbar" bg="light" expand="md" collapseOnSelect>
 				<Container>
 					<LinkContainer to="/">
 						<Navbar.Brand>Working Comics</Navbar.Brand>
 					</LinkContainer>
+
 					<Navbar.Toggle aria-controls="basic-navbar-nav" />
 					<Navbar.Collapse id="basic-navbar-nav">
 						<Nav className="ml-auto">
+							<LinkContainer to="/podcasts">
+								<Nav.Link>Podcasts</Nav.Link>
+							</LinkContainer>
 							{userInfo ? (
 								<NavDropdown title={userInfo.name} id="username">
 									<LinkContainer to="/podcasts">
