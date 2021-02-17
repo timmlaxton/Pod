@@ -50,7 +50,8 @@ const createPodcast = asyncHandler(async (req, res) => {
 	const podcast = new Podcast({
 		name,
 		image,
-		description
+		description,
+		user: req.user._id
 	});
 
 	const createdPodcast = await podcast.save();

@@ -26,7 +26,7 @@ const PodcastScreen = () => {
 			) : (
 				<Row>
 					{podcasts.map((podcast) => (
-						<Col sm={12} md={6} lg={4} xl={3}>
+						<Col key={podcast._id} sm={12} md={6} lg={4} xl={3}>
 							<Podcast podcast={podcast} />
 						</Col>
 					))}

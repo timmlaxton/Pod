@@ -21,28 +21,29 @@ const PodcastEditScreen = ({ match, history }) => {
 
 	const dispatch = useDispatch();
 
-	const isCreatedPodcastMode = match.path.includes('/admin/podcast/create');
-
 	const podcastDetails = useSelector((state) => state.podcastDetails);
 	const { loading, error, podcast } = podcastDetails;
 
-	const podcastUpdate = useSelector((state) => (isCreatedPodcastMode ? state.podcastCreate : state.podcastCreate));
+	const isCreatePodcastMode = match.path.includes('/admin/podcast/create');
+
+	const podcastUpdate = useSelector((state) => (isCreatePodcastMode ? state.podcastCreate : state.podcastUpdate));
 	const { loading: loadingUpdate, error: errorUpdate, success: successUpdate } = podcastUpdate;
 
 	useEffect(() => {
 		if (successUpdate) {
-			dispatch({ type: isCreatedPodcastMode ? PODCAST_CREATE_RESET : PODCAST_UPDATE_RESET });
+			dispatch({ type: isCreatePodcastMode ? PODCAST_CREATE_RESET : PODCAST_UPDATE_RESET });
 			history.push('/admin/podcastlist');
 			return;
 		}
-		if (isCreatedPodcastMode) return;
-		if (!podcastUpdate.name || podcastUpdate._id !== podcastId) {
+		if (isCreatePodcastMode) return;
+		if (!podcast.name || podcast._id !== podcastId) {
 			dispatch(listPodcastDetails(podcastId));
 		} else {
 			setName(podcast.name);
 			setDescription(podcast.description);
+			setImagePreview(podcast.image);
 		}
-	}, [dispatch, podcastId, podcast, history, successUpdate, isCreatedPodcastMode]);
+	}, [dispatch, podcastId, podcast, history, successUpdate, isCreatePodcastMode]);
 
 	const onUploadImage = (e) => {
 		const file = e.target.files[0];
@@ -75,7 +76,6 @@ const PodcastEditScreen = ({ match, history }) => {
 			};
 
 			const { data } = await axios.post('/api/upload', formData, config);
-
 			return data;
 		} catch (error) {
 			console.error(error);
@@ -98,7 +98,7 @@ const PodcastEditScreen = ({ match, history }) => {
 			...(finalImage && { image: finalImage })
 		};
 
-		dispatch(isCreatedPodcastMode ? createPodcast(payload) : updatePodcast(payload));
+		dispatch(isCreatePodcastMode ? createPodcast(payload) : updatePodcast(payload));
 	};
 
 	return (
@@ -108,7 +108,7 @@ const PodcastEditScreen = ({ match, history }) => {
 			</Link>
 
 			<FormContainer>
-				<h1>{isCreatedPodcastMode ? 'Create Podcast' : 'Edit Podcast'}</h1>
+				<h1>{isCreatePodcastMode ? 'Create Podcast' : 'Edit Podcast'}</h1>
 				{loadingUpdate && <Loader />}
 				{errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
 				{loading ? (
@@ -154,7 +154,7 @@ const PodcastEditScreen = ({ match, history }) => {
 						</Form.Group>
 
 						<Button type="submit" variant="primary">
-							{isCreatedPodcastMode ? 'Create' : 'Update'}
+							{isCreatePodcastMode ? 'Create' : 'Update'}
 						</Button>
 					</Form>
 				)}

@@ -21,7 +21,6 @@ const App = () => {
 				<Route path="/admin/podcastlist" component={PodcastListScreen} exact />
 				<Route path="/admin/podcast/:id/edit" component={PodcastEditScreen} exact />
 				<Route path="/admin/podcast/create" component={PodcastEditScreen} />
-
 				<Route path="/login" component={LoginScreen} />
 			</Container>
 			<Footer />

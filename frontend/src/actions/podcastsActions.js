@@ -94,10 +94,10 @@ export const createPodcast = (payload) => async (dispatch, getState) => {
 
 		const config = {
 			headers: {
-				Authorizaton: `Bearer ${userInfo.token}`
+				Authorization: `Bearer ${userInfo.token}`
 			}
 		};
-		const { data } = await axios.post('/api/podcasts', payload, config);
+		const { data } = await axios.post(`/api/podcasts`, payload, config);
 
 		dispatch({
 			type: PODCAST_CREATE_SUCCESS,

@@ -13,14 +13,14 @@ const PodcastListScreen = ({ history }) => {
 	const podcastList = useSelector((state) => state.podcastList);
 	const { loading, error, podcasts } = podcastList;
 
-	const userLogin = useSelector((state) => state.userLogin);
-	const { userInfo } = userLogin;
-
 	const podcastDelete = useSelector((state) => state.podcastDelete);
 	const { loading: loadingDelete, error: errorDelete, success: successDelete } = podcastDelete;
 
 	const podcastCreate = useSelector((state) => state.podcastCreate);
 	const { loading: loadingCreate, error: errorCreate, success: successCreate, podcast: createdPodcast } = podcastCreate;
+
+	const userLogin = useSelector((state) => state.userLogin);
+	const { userInfo } = userLogin;
 
 	useEffect(() => {
 		dispatch({ type: PODCAST_CREATE_RESET });
@@ -57,7 +57,7 @@ const PodcastListScreen = ({ history }) => {
 					</Button>
 				</Col>
 			</Row>
-			{/* {loadingDelete && <Loader />} */}
+			{loadingDelete && <Loader />}
 			{errorDelete && <Message variant="danger">{errorDelete}</Message>}
 			{loadingCreate && <Loader />}
 			{errorCreate && <Message variant="danger">{errorCreate}</Message>}
